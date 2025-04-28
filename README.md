@@ -6,6 +6,7 @@
 ## 2.環境
  - 日本語
  - windows10
+ - dotnet version 9.0.102
  - Raylib-cs 7.0.1
 
 ## 3.インストール方法

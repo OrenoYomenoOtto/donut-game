@@ -22,30 +22,36 @@ class ViewStateMachine
     static readonly Color BLACK = new Color(0, 0, 0, 255);
     static readonly int FPS = 60; // フレームレート設定.
 
-    private GamePhase mState;
+    private GamePhase State;
 
-    private GameView mGame;
+    private GameView Game;
 
     public ViewStateMachine()
     {
-        this.mGame = new GameView();
-        
+        this.Game = new GameView();
+
         // this.mState = GamePhase.E_TITLE;
-        this.mState = GamePhase.E_GAME;
+        this.State = GamePhase.E_GAME;
     }
 
-    public void StateProccess()
+    // 現在ステートがE_ENDなら真を返す
+    public bool isStateEnd()
     {
-        switch (this.mState)
+        return this.State == GamePhase.E_END;
+    }
+
+    public void StateProcess()
+    {
+        switch (this.State)
         {
             case GamePhase.E_END:
-                Raylib.WindowShouldClose();
+                // 処理なし
                 break;
             case GamePhase.E_TITLE:
                 // title.TitleDraw();
                 break;
             case GamePhase.E_GAME:
-                this.mState = this.mGame.GameDraw();
+                this.State = this.Game.GameDraw();
                 break;
             case GamePhase.E_RESULT:
                 // this.mState = result.ResultDraw();
@@ -57,9 +63,5 @@ class ViewStateMachine
                 // this.mState = houto.HowToPlayDraw();
                 break;
         }
-        Raylib.EndDrawing();
-
-
-        Raylib.CloseWindow();
     }
 }

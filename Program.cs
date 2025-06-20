@@ -18,13 +18,13 @@ class Donut
         Raylib.SetTargetFPS(FPS);
 
         ViewStateMachine stateMachine = new ViewStateMachine();
-        while (!Raylib.WindowShouldClose())
+        while (!Raylib.WindowShouldClose() && !stateMachine.isStateEnd())
         {
             Raylib.BeginDrawing();
             Raylib.ClearBackground(RAYWHITE); // 画面クリア
 
             // 現在ステートに対応する処理を実行
-            stateMachine.StateProccess();
+            stateMachine.StateProcess();
 
             Raylib.EndDrawing();
         }

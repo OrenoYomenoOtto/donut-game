@@ -20,14 +20,8 @@ public class GameView
     // 現在ステートがE_GAMEの時に毎フレーム呼ばれる関数
     public GamePhase GameDraw()
     {
-        this.GameInit();
-        return GamePhase.E_GAME;
-    }
-
-    // 何かを初期化
-    private void GameInit()
-    {
         this.DrawGrid();
+        return GamePhase.E_GAME;
     }
 
     private void GameStart()

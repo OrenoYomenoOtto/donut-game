@@ -1,5 +1,8 @@
-﻿using System;
+using System;
 using Raylib_cs;
+
+using donut.core.handle;
+using donut.core.view;
 
 class Donut
 {
@@ -14,12 +17,14 @@ class Donut
         Raylib.InitWindow(800, 600, "ドーナツゲーム🍩"); // 画面サイズ，ウィンドウタイトルの設定．
         Raylib.SetTargetFPS(FPS);
 
-        while(!Raylib.WindowShouldClose())
+        ViewStateMachine stateMachine = new ViewStateMachine();
+        while (!Raylib.WindowShouldClose())
         {
             Raylib.BeginDrawing();
-            Raylib.ClearBackground(RAYWHITE); // 背景色指定．
+            Raylib.ClearBackground(RAYWHITE); // 画面クリア
 
-            Raylib.DrawText("Hello, Donut Game!", 250, 280, 20, BLACK); // 文字列表示テスト．
+            // 現在ステートに対応する処理を実行
+            stateMachine.StateProccess();
 
             Raylib.EndDrawing();
         }

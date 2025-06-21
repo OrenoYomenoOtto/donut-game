@@ -1,15 +1,28 @@
 using System;
 using Raylib_cs;
 using donut.core.handle;
+using System.Reflection.Metadata;
 
 namespace donut.core.view;
 
 public class GameView
 {
+    const int DONUT_PIX = 64;
+
+    const int DRAW_AREA_X_BEGIN = 71;
+    const int DRAW_AREA_X_END = DRAW_AREA_X_BEGIN + DONUT_PIX * 7;
+    const int DRAW_AREA_Y_BEGIN = 132;
+    const int DRAW_AREA_Y_END = DRAW_AREA_Y_BEGIN + DONUT_PIX * 6;
+
     static readonly Color BLACK = new Color(0, 0, 0, 255);
+    
+    static readonly Color WHITE = new Color(255, 255, 255, 255);
+
+    private Texture2D backgroundTexture;
+
     public GameView()
     {
-
+        backgroundTexture = Raylib.LoadTextureFromImage(Raylib.LoadImage("assets/images/GameViewBack.png"));
     }
 
     ~GameView()
@@ -20,6 +33,7 @@ public class GameView
     // 現在ステートがE_GAMEの時に毎フレーム呼ばれる関数
     public GamePhase GameDraw()
     {
+        Raylib.DrawTexture(backgroundTexture, 0, 0, WHITE);
         this.DrawGrid();
         return GamePhase.E_GAME;
     }
@@ -31,13 +45,13 @@ public class GameView
 
     private void DrawGrid()
     {
-        for (int x = 0; x < 800; x += 100)
+        for (int x = DRAW_AREA_X_BEGIN; x <= DRAW_AREA_X_END; x += DONUT_PIX)
         {
-            Raylib.DrawLine(x, 0, x, 600, BLACK);
+            Raylib.DrawLine(x, DRAW_AREA_Y_BEGIN, x, DRAW_AREA_Y_END, BLACK);
         }
-        for (int y = 0; y < 600; y += 100)
+        for (int y = DRAW_AREA_Y_BEGIN; y <= DRAW_AREA_Y_END; y += DONUT_PIX)
         {
-            Raylib.DrawLine(0, y, 800, y, BLACK);
+            Raylib.DrawLine(DRAW_AREA_X_BEGIN, y, DRAW_AREA_X_END, y, BLACK);
         }
     }
 }

@@ -9,7 +9,7 @@ class Donut
     // 描画用色定義
     static readonly Color RAYWHITE = new Color(245, 245, 245, 255);  // 公式のRAYWHITE相当
     static readonly Color BLACK = new Color(0, 0, 0, 255);
-    static readonly int FPS = 60; // フレームレート設定.
+    const int FPS = 60; // フレームレート設定.
 
     static void Main()
     {

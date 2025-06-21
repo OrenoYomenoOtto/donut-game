@@ -2,6 +2,7 @@ using System;
 using Raylib_cs;
 using donut.core.view;
 using donut.core.view.titleView;
+using System.Reflection.Metadata;
 
 namespace donut.core.handle;
 
@@ -17,11 +18,6 @@ public enum GamePhase
 
 class ViewStateMachine
 {
-    // 描画用色定義
-    static readonly Color RAYWHITE = new Color(245, 245, 245, 255);  // 公式のRAYWHITE相当
-    static readonly Color BLACK = new Color(0, 0, 0, 255);
-    static readonly int FPS = 60; // フレームレート設定.
-
     private GamePhase State;
 
     private GameView Game;

@@ -15,9 +15,31 @@ public class RankingView(List<RankingScore> rankingScores)
     public List<RankingScore> RankingScores { get; set; } = rankingScores;
 
     /// <summary>
+    /// 戻るボタンのX座標
+    /// </summary>
+    readonly int backButtonX = 100;
+
+    /// <summary>
+    /// 戻るボタンのY座標
+    /// </summary>
+    readonly int backButtonY = 400;
+
+    /// <summary>
+    /// 戻るボタンの幅
+    /// </summary>
+    readonly int backButtonWidth = 100;
+
+    /// <summary>
+    /// 戻るボタンの高さ
+    /// </summary>
+    readonly int backButtonHeight = 40;
+
+    /// <summary>
     /// ランキング画面を描画します
     /// </summary>
-    /// <returns>現在のゲームフェーズ（E_RANKING）</returns>
+    /// <returns>
+    /// 描画後のゲームフェーズを返します
+    /// </returns>
     public GamePhase RankingDraw()
     {
         Raylib.ClearBackground(Color.RayWhite);
@@ -26,6 +48,29 @@ public class RankingView(List<RankingScore> rankingScores)
         for (int i = 0; i < RankingScores.Count; i++)
         {
             DrawRankingScore(RankingScores[i], i);
+        }
+
+        // 戻るボタンの描画とクリック処理
+        // 画面の左上に「Back」と表示し、クリックでタイトル画面に戻る処理を追加
+        float mousePositionX = Raylib.GetMousePosition().X;
+        float mousePositionY = Raylib.GetMousePosition().Y;
+
+        bool isMouseOverBackButton = mousePositionX >= backButtonX && mousePositionX <= backButtonX + backButtonWidth &&
+                                    mousePositionY >= backButtonY && mousePositionY <= backButtonY + backButtonHeight;
+
+        if (isMouseOverBackButton)
+        {
+            Raylib.DrawRectangle(backButtonX, backButtonY, backButtonWidth, backButtonHeight, Color.LightGray);
+            Raylib.DrawText("Back", backButtonX + 20, backButtonY + 10, 20, Color.Black);
+        }
+        else
+        {
+            Raylib.DrawRectangle(backButtonX, backButtonY, backButtonWidth, backButtonHeight, Color.Gray);
+            Raylib.DrawText("Back", backButtonX + 20, backButtonY + 10, 20, Color.White);
+        }
+        if (Raylib.IsMouseButtonPressed(MouseButton.Left) && isMouseOverBackButton)
+        {
+            return GamePhase.E_TITLE;
         }
 
         return GamePhase.E_RANKING;

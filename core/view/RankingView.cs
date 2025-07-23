@@ -86,11 +86,4 @@ public class RankingView(List<RankingScore> rankingScores)
         Raylib.DrawText($"{index + 1}. {score.PlayerName}", 150, 100 + index * 60, 20, Color.Black);
         Raylib.DrawText($"{score.Score}", 200, 130 + index * 60, 20, Color.Black);
     }
-
-    /// <summary>
-    /// RankingViewのデストラクタ
-    /// </summary>
-    ~RankingView()
-    {
-    }
 }

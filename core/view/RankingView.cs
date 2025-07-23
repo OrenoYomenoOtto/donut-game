@@ -55,8 +55,10 @@ public class RankingView(List<RankingScore> rankingScores)
         float mousePositionX = Raylib.GetMousePosition().X;
         float mousePositionY = Raylib.GetMousePosition().Y;
 
-        bool isMouseOverBackButton = mousePositionX >= backButtonX && mousePositionX <= backButtonX + backButtonWidth &&
-                                    mousePositionY >= backButtonY && mousePositionY <= backButtonY + backButtonHeight;
+        bool isMouseOverBackButton = mousePositionX >= backButtonX
+            && mousePositionX <= backButtonX + backButtonWidth
+            && mousePositionY >= backButtonY
+            && mousePositionY <= backButtonY + backButtonHeight;
 
         if (isMouseOverBackButton)
         {

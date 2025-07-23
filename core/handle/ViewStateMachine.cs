@@ -3,6 +3,7 @@ using Raylib_cs;
 using donut.core.view;
 using donut.core.view.titleView;
 using System.Reflection.Metadata;
+using donut.core.view.rankingView;
 
 namespace donut.core.handle;
 
@@ -21,10 +22,18 @@ class ViewStateMachine
     private GamePhase State;
 
     private GameView Game;
+    private RankingView Ranking;
 
     public ViewStateMachine()
     {
         this.Game = new GameView();
+        var defaultScores = new List<RankingScore>
+        {
+            new RankingScore("Test 1", 100),
+            new RankingScore("Test 2", 90),
+            new RankingScore("Test 3", 80)
+        };
+        this.Ranking = new RankingView(defaultScores);
 
         // this.mState = GamePhase.E_TITLE;
         this.State = GamePhase.E_GAME;
@@ -53,7 +62,7 @@ class ViewStateMachine
                 // this.mState = result.ResultDraw();
                 break;
             case GamePhase.E_RANKING:
-                // this.mState = ranking.RankingDraw();
+                State = Ranking.RankingDraw();
                 break;
             case GamePhase.E_HOW_TO_PLAY:
                 // this.mState = houto.HowToPlayDraw();
